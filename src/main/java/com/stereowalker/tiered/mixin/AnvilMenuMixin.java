@@ -49,13 +49,15 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenu {
 				// attempt to get a random tier
 				ResourceLocation potentialAttributeID = this.reforgedAttribute;
 				int i = 0;
-				while (potentialAttributeID.equals(this.reforgedAttribute) && i < 2) {
+				while ((potentialAttributeID == null || potentialAttributeID.equals(this.reforgedAttribute)) && i < 2) {
 					potentialAttributeID = ModifierUtils.getRandomAttributeIDFor(p_150475_.getItem());
 					i++;
 				}
 				// found an ID
 				if(potentialAttributeID != null) {
 					p_150475_.getOrCreateTagElement(Tiered.NBT_SUBTAG_KEY).putString(Tiered.NBT_SUBTAG_DATA_KEY, potentialAttributeID.toString());
+				} else {
+					Tiered.LOGGER.info("Failed to find an appropriate modifier for this item");
 				}
 
 				if ((hammer.getMaxDamage() - hammer.getDamageValue()) == potential.getReforgeDurabilityCost())

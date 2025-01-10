@@ -32,3 +32,4 @@ run/
 *.launch
 /Java Projects/
 /.apt_generated/
+.idea
